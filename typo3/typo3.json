@@ -32,6 +32,14 @@
   "provisioners": [{
     "type": "shell",
     "inline": [
+      "yum -y install gcc kernel-devel kernel-headers make bzip2",
+      "rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm",
+      "yum -y install dkms",
+      "export KERN_DIR=/usr/src/kernels/`uname -r`",
+      "mkdir /mnt/VBoxGuestAdditions",
+      "mount -o loop VBoxGuestAdditions.iso /mnt/VBoxGuestAdditions",
+      "/mnt/VBoxGuestAdditions/VBoxLinuxAdditions.run",
+
       "yum -y install mysql-server",
       "chkconfig mysqld on",
       "service mysqld start",
@@ -60,21 +68,7 @@
       "mkdir casperjs && tar xzf casperjs.tar.gz --strip 1 -C casperjs",
       "ln -sf `pwd`/casperjs/bin/casperjs /usr/local/bin/casperjs",
       "curl https://gist.github.com/jerser/de36a686f3591d4f91d8/raw/f7e45626f25325162958bc2bfecd08d2817b178f/123.sh | bash"
-    ],
-    "override": {
-      "virtualbox": {
-        "type": "shell",
-        "inline": [
-          "yum -y install gcc kernel-devel kernel-headers make bzip2",
-          "rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm",
-          "yum -y install dkms",
-          "export KERN_DIR=/usr/src/kernels/`uname -r`",
-          "mkdir /mnt/VBoxGuestAdditions",
-          "mount -o loop VBoxGuestAdditions.iso /mnt/VBoxGuestAdditions",
-          "/mnt/VBoxGuestAdditions/VBoxLinuxAdditions.run"
-        ]
-      }
-    }
+    ]
   }],
 
   "post-processors": [
