@@ -31,43 +31,12 @@
 
   "provisioners": [{
     "type": "shell",
-    "inline": [
-      "yum -y install gcc kernel-devel kernel-headers make bzip2",
-      "rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm",
-      "yum -y install dkms",
-      "export KERN_DIR=/usr/src/kernels/`uname -r`",
-      "mkdir /mnt/VBoxGuestAdditions",
-      "mount -o loop VBoxGuestAdditions.iso /mnt/VBoxGuestAdditions",
-      "/mnt/VBoxGuestAdditions/VBoxLinuxAdditions.run",
-
-      "yum -y install mysql-server",
-      "chkconfig mysqld on",
-      "service mysqld start",
-      "echo \"create database typo3;\" | mysql -u root",
-      "echo \"grant usage on *.* to typo3@localhost identified by 'typo3';\" | mysql -u root",
-      "echo \"grant all privileges on typo3.* to typo3@localhost;\" | mysql -u root",
-
-      "rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm",
-      "yum --enablerepo=remi,remi-test -y install httpd php php-common",
-      "yum --enablerepo=remi,remi-test -y install php-pecl-apc php-cli php-pear php-pdo php-mysql php-gd php-mbstring php-mcrypt php-xml",
-      "chkconfig httpd on",
-      "service httpd start",
-
-      "curl -L http://get.typo3.org/introduction -o typo3_introduction.tar.gz",
-      "rm -rf /var/www/html",
-      "mkdir /var/www/typo3",
-      "tar zxf typo3_introduction.tar.gz -C /var/www/typo3",
-      "ln -s /var/www/typo3/`ls -tr /var/www/typo3 | tail -1` /var/www/html",
-      "chown -R apache.apache /var/www",
-
-      "yum -y install fontconfig freetype bzip2",
-      "curl -L https://phantomjs.googlecode.com/files/phantomjs-1.9.1-linux-i686.tar.bz2 -o phantomjs.tar.bz2",
-      "mkdir phantomjs && tar xjf phantomjs.tar.bz2 --strip 1 -C phantomjs",
-      "ln -sf `pwd`/phantomjs/bin/phantomjs /usr/local/bin/phantomjs",
-      "curl -L https://github.com/n1k0/casperjs/tarball/1.0.2 -o casperjs.tar.gz",
-      "mkdir casperjs && tar xzf casperjs.tar.gz --strip 1 -C casperjs",
-      "ln -sf `pwd`/casperjs/bin/casperjs /usr/local/bin/casperjs",
-      "curl https://gist.github.com/jerser/de36a686f3591d4f91d8/raw/f7e45626f25325162958bc2bfecd08d2817b178f/123.sh | bash"
+    "scripts": [
+      "provisioning/virtualbox.sh",
+      "provisioning/mysql.sh",
+      "provisioning/apache_php.sh",
+      "provisioning/typo3.sh",
+      "provisioning/clean.sh"
     ]
   }],
 
