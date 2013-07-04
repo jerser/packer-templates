@@ -15,7 +15,7 @@
       ["modifyvm", "{{.Name}}", "--natpf1", "typo3mysql,tcp,,3307,,3306"]
     ],
 
-    "disk_size": 10000,
+    "disk_size": 5000,
 
     "http_directory": ".",
 
