@@ -7,6 +7,7 @@ if [ `virt-what` == "virtualbox" ]; then
   echo -e "vagrant\nvagrant" | (passwd --stdin vagrant)
 
   echo "vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+  echo "Defaults:vagrant !requiretty" >> /etc/sudoers
 
   mkdir -m 777 /vagrant
   mkdir -m 700 /home/vagrant/.ssh
