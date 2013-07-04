@@ -2,4 +2,6 @@ Vagrant.configure("2") do |config|
   config.vm.base_mac = "{{ .BaseMacAddress }}"
   config.vm.network :forwarded_port, guest: 80, host: 9090, auto_correct: true
   config.vm.network :forwarded_port, guest: 3306, host: 3307, auto_correct: true
+
+  config.vm.synced_folder "typo3", "/typo3", owner: "apache", group: "apache", create: true
 end
