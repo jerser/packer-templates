@@ -33,6 +33,7 @@
     "type": "shell",
     "scripts": [
       "provisioning/virtualbox.sh",
+      "provisioning/vagrant.sh",
       "provisioning/mysql.sh",
       "provisioning/apache_php.sh",
       "provisioning/typo3.sh",
