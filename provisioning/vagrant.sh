@@ -8,7 +8,8 @@ if [ `virt-what` == "virtualbox" ]; then
 
   echo "vagrant ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-  mkdir -pm 700 /home/vagrant/.ssh
+  mkdir -m 777 /vagrant
+  mkdir -m 700 /home/vagrant/.ssh
   curl -L https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub -o /home/vagrant/.ssh/authorized_keys
   chmod 0600 /home/vagrant/.ssh/authorized_keys
   chown -R vagrant.vagrant /home/vagrant/.ssh
