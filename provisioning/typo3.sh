@@ -15,6 +15,14 @@ rm -f typo3_introduction.tar.gz
 ln -s /var/www/typo3/`ls -tr /var/www/typo3 | tail -1` /var/www/html
 chown -R apache.apache /var/www
 
+cat >> /etc/httpd/conf/httpd.conf <<EOF
+
+<Directory "/var/www/html">
+  AllowOverride All
+</Directory>
+
+EOF
+
 yum -y install fontconfig freetype bzip2
 curl -L https://phantomjs.googlecode.com/files/phantomjs-1.9.1-linux-i686.tar.bz2 -o phantomjs.tar.bz2
 mkdir phantomjs && tar xjf phantomjs.tar.bz2 --strip 1 -C phantomjs
